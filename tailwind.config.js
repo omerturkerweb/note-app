@@ -6,6 +6,9 @@ module.exports = {
       fontFamily: {
         app_base_font: "'Source Sans Pro', sans-serif",
       },
+      backgroundColor: {
+        notes_bg: "rgba(0, 0, 0, 0.018)",
+      },
     },
   },
   plugins: [],

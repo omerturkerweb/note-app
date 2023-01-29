@@ -18,3 +18,6 @@ body,
   list-style-type: none;
   text-decoration: none;
 }
+.s {
+  background-color: rgba(0, 0, 0, 0.018);
+}
