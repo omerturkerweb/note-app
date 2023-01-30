@@ -18,6 +18,12 @@ body,
   list-style-type: none;
   text-decoration: none;
 }
-.s {
-  background-color: rgba(0, 0, 0, 0.018);
+#subject:valid,
+#note:valid {
+  border: 1px solid green;
+}
+
+.card_editing {
+  height: 350px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.19);
 }

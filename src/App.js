@@ -19,8 +19,10 @@ function App() {
   const [newNoteDialog, setNewNoteDialog] = useState(false);
   const [rateStar, setRateStar] = useState(1);
   const [notes, setNotes] = useState([]);
+  const [touchedNoteInput, setTouchedNoteInput] = useState(false);
   const [snackSuccess, setSnackSuccess] = useState(false);
   const [idGenerator, setIdGenerator] = useState(0);
+  const [editingNote, setEditingNote] = useState(false);
   const handleClickOpen = () => {
     setNewNoteDialog(true);
   };
@@ -35,9 +37,7 @@ function App() {
     }
     setSnackSuccess(false);
   };
-  useEffect(() => {
-    console.log(notes.sort((a, b) => b.priority - a.priority));
-  }, [notes]);
+
   const currentDate = new Date();
   return (
     <div className="App ">
@@ -98,26 +98,65 @@ function App() {
                 setSnackSuccess(true);
               }}
             >
-              {({ dirty, handleChange, handleSubmit }) => {
+              {({
+                dirty,
+                handleChange,
+                handleSubmit,
+                errors,
+                values,
+                touched,
+              }) => {
                 return (
                   <form
                     onSubmit={handleSubmit}
                     className=" flex flex-col items-center justify-center gap-y-2 "
                   >
                     <input
+                      required
                       id="subject"
-                      className="shadow border font-semibold   rounded w-full py-2 px-3 text-gray-700 leading-tight  border-gray-300 transition-all placeholder:text-[13px] duration-200  outline-none focus:border focus:border-blue-300"
+                      className={
+                        errors.subject
+                          ? "shadow border font-semibold border-red-500 rounded w-full py-2 px-3 text-gray-700 leading-tight transition-all placeholder:text-[13px] duration-200  outline-none focus:border focus:border-blue-300"
+                          : "shadow border font-semibold rounded w-full py-2 px-3 text-gray-700 leading-tight  border-gray-300 transition-all placeholder:text-[13px] duration-300  outline-none focus:border focus:border-blue-300"
+                      }
                       type="text"
                       placeholder="Enter your note's subject ..."
                       onChange={handleChange}
                     ></input>
+
+                    <Alert
+                      className={`${
+                        errors.subject
+                          ? "transition-all  duration-300 w-[100%] h-[30px] flex flex-row items-center justify-center"
+                          : "transition-all duration-300 !hidden"
+                      }`}
+                      color="error"
+                      variant="filled"
+                    >
+                      {errors.subject}
+                    </Alert>
                     <textarea
+                      onClick={() => {
+                        setTouchedNoteInput(true);
+                      }}
+                      required
                       id="note"
                       placeholder="Enter your note content here..."
                       rows={20}
                       className=" font-base-font shadow resize-none border rounded w-full py-2 px-3 text-gray-700 leading-tight border-gray-300 transition-all placeholder:text-[13px] duration-200  outline-none focus:border focus:border-blue-300"
                       onChange={handleChange}
                     ></textarea>
+                    <Alert
+                      className={`${
+                        errors.note && touchedNoteInput
+                          ? "transition-all  duration-300 w-[100%] h-[30px] flex flex-row items-center justify-center"
+                          : "transition-all duration-300 !hidden"
+                      }`}
+                      color="error"
+                      variant="filled"
+                    >
+                      {errors.note}
+                    </Alert>
                     <Rating
                       id="priority"
                       onChange={(e, newValue) => {
@@ -155,6 +194,8 @@ function App() {
               .map((note, index) => {
                 return (
                   <Notes
+                    editingNote={editingNote}
+                    setEditingNote={setEditingNote}
                     setNotes={setNotes}
                     notes={notes}
                     note={note}
