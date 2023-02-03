@@ -68,7 +68,7 @@ function App() {
           onClose={handleClose}
           open={newNoteDialog}
         >
-          <DialogTitle className="text-center">{`add new note`}</DialogTitle>
+          <DialogTitle className="text-center !font-app_base_font !font-semibold">{`add new note`}</DialogTitle>
           <DialogContent>
             <Formik
               initialValues={{
