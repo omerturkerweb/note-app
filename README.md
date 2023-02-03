@@ -1,3 +1,29 @@
+
+# Note App
+
+I made a notes app where you can create notes and then edit them again
+    
+## Used Technologies
+
+- React ,(icons)
+- Tailwind
+- Formik(with yup)
+- meterial ui
+
+
+## Screenshots
+
+![ScreenShot](https://img001.prntscr.com/file/img001/HYxeFh4ZQauA8_DvxlLnIA.png)
+![ScreenShot](https://img001.prntscr.com/file/img001/s_HyOqgUR2Kv0PT8QeR5OA.png)
+![ScreenShot](https://img001.prntscr.com/file/img001/50O687awT-uI5GAZjIcx9w.png)
+
+
+## Live(Netlify)
+
+- https://master--zesty-cassata-b4d845.netlify.app/
+
+  
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
