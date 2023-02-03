@@ -22,7 +22,6 @@ function App() {
   const [touchedNoteInput, setTouchedNoteInput] = useState(false);
   const [snackSuccess, setSnackSuccess] = useState(false);
   const [idGenerator, setIdGenerator] = useState(0);
-  const [editingNote, setEditingNote] = useState(false);
   const handleClickOpen = () => {
     setNewNoteDialog(true);
   };
@@ -39,6 +38,8 @@ function App() {
   };
 
   const currentDate = new Date();
+  console.log("rendered");
+
   return (
     <div className="App ">
       <div className="add_note fixed bottom-5 right-5">
@@ -84,13 +85,14 @@ function App() {
                 setNotes((note) => [
                   ...note,
                   {
-                    id: idGenerator,
+                    id: idGenerator + 1,
                     subject: values.subject,
                     note: values.note,
                     priority: values.priority,
                     date: `${currentDate.getDate()}.${
                       currentDate.getMonth() + 1
                     }.${currentDate.getFullYear()} ${currentDate.getHours()}.${currentDate.getMinutes()}`,
+                    editing: false,
                   },
                 ]);
                 setIdGenerator(idGenerator + 1);
@@ -194,8 +196,6 @@ function App() {
               .map((note, index) => {
                 return (
                   <Notes
-                    editingNote={editingNote}
-                    setEditingNote={setEditingNote}
                     setNotes={setNotes}
                     notes={notes}
                     note={note}
